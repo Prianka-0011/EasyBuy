@@ -1,0 +1,82 @@
+﻿@model IEnumerable<EasyBuy.Models.Product>
+@{
+    ViewData["Title"] = "Index";
+    int i = 1;
+}
+
+
+    <div class="border p-4 rounded">
+        <h1 class="text-center text-warning mb-5">All Category </h1>
+        <form asp-action="Index" method="post">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input class="form-control" name="srcText" value="@ViewBag.srcText" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button class="btn btn-info" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 pull-right">
+                    <a asp-action="Create" class="btn btn-success">Create New</a>
+                </div>
+            </div>
+        </form>
+    @if (Model != null)
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ProductId</th>
+                    <th>Category Name</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>PrevPrice</th>
+                    <th>Quantity</th>
+                    <th>Description</th>
+                    <th>Specification</th>
+                    <th>Image</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Id</td>
+                    <td>@item.Category.Name</td>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>@item.PrevPrice</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Description</td>
+                    <td>@item.Specification</td>
+                    <td><img src="~/@item.Image" alt="Alternate Text" style="height:50px;width:50px; border-radius:25px" /></td>
+                    <td>
+                        @if (item.IsAviable)
+                        {
+                            <b class="text-success">Enable</b>
+                        }
+                        else
+                        {
+                            <b class="text-danger">Disable</b>
+                        }
+                    </td>
+                    <partial name="_ButtonPartial" model="@item.Id" />
+                </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    }
+</div>

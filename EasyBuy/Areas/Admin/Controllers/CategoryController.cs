@@ -40,7 +40,7 @@ namespace EasyBuy.Controllers
             if (ModelState.IsValid)
             {
                 //For  Redandent category Name do not Create
-                var sameCatCheck = _context.Categories.FirstOrDefault(c => c.Id == category.Id);
+                var sameCatCheck = _context.Categories.FirstOrDefault(c => c.Name == category.Name );
                 if (sameCatCheck!=null)
                 {
                     TempData["create"] = "This Category All Ready Exist";
