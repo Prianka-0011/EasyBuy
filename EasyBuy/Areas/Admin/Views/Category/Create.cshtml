@@ -1,0 +1,64 @@
+﻿@model EasyBuy.Models.Category
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="border p-4 rounded">
+        <h1 class="text-center text-danger mb-4">Create New Category</h1>
+
+        <div class="row">
+            <div class="col-md-8 offset-md-4">
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="form-group row">
+                    @*<div class="col-md-3">
+
+                    </div>*@
+                    <div class="col-md-5">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @*<div class="col-md-3">
+
+                    </div>*@
+                    <div class="col-md-5">
+                        <label asp-for="Image"></label>
+                        <input asp-for="Image" type="file" class="form-control" />
+                        <span asp-validation-for="Image"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8 ">
+                        <button class="btn btn-success" type="submit">Save</button>
+                        <a asp-action="Index" class="btn btn-warning ml-2">Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js">
+
+        $(function(){
+            var create = '@TempData["create"]';
+            var update = '@TempData["update"]';
+            var delete = '@TempData["delete"]';
+            if (create != null) {
+                alertify.success(create);
+            }
+            if (update != null) {
+                alertify.success(update);
+            }
+            if (delete != null) {
+                alertify.success(delete);
+            }
+        });
+    </script>
+}

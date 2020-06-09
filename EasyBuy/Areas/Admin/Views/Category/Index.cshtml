@@ -1,0 +1,53 @@
+﻿@model IEnumerable<EasyBuy.Models.Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+    <div class="border p-4 rounded">
+        <h1 class="text-center text-warning mb-5">All Category </h1>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input class="form-control" name="srcText" value="" />
+                            @*<button class="btn btn-info mt-3" type="submit">Search</button>*@
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button class="btn btn-info" type="submit">Search</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4 pull-right">
+                <a asp-action="Create" class="btn btn-success">Create New</a>
+            </div>
+        </div>
+
+        @if (Model != null)
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="width:200px">@item.Name</td>
+                            <td style="width:200px"><img src="~/@item.Image" alt="Alternate Text" style="height:50px;width:50px; border-radius:25px" /></td>
+                            <partial name="_ButtonPartial" model="@item.Id" />
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
