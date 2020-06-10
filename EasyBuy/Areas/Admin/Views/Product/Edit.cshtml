@@ -1,0 +1,122 @@
+﻿
+@model EasyBuy.Models.Product
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <span class=" text-warning font-weight-normal"><b>Edit Product</b></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 ml-2">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <div class="row">
+                            <input type="hidden" asp-for="Id" />
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label asp-for="CategoryId"></label>
+                                    <select class="form-control" asp-for="CategoryId" asp-items="ViewBag.Category"></select>
+                                    <span asp-validation-for="CategoryId"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group ">
+                                    <label asp-for="Name"></label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label asp-for="Price"></label>
+                                    <input asp-for="Price" class="form-control" />
+                                    <span asp-validation-for="Price"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label asp-for="PrevPrice"></label>
+                                    <input asp-for="PrevPrice" class="form-control" />
+                                    <span asp-validation-for="PrevPrice"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label asp-for="Quantity"></label>
+                                    <input asp-for="Quantity" class="form-control" />
+                                    <span asp-validation-for="Quantity"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label asp-for="Description"></label>
+                                    <input asp-for="Description" class="form-control" />
+                                    <span asp-validation-for="Description"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group ">
+                                    <label asp-for="Specification"></label>
+                                    <input asp-for="Specification" class="form-control" />
+                                    <span asp-validation-for="Specification"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group ">
+                                    <label asp-for="Image"></label>
+                                    <input asp-for="Image" type="file" class="form-control" />
+                                    <span asp-validation-for="Image"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-5">
+                                <label asp-for="IsAviable"></label>
+                                <input asp-for="IsAviable" />
+                                <span asp-validation-for="IsAviable"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-8 offset-md-4 ">
+                                <button class="btn btn-success" type="submit">Update</button>
+                                <a asp-action="Index" class="btn btn-warning ml-1">Back To List</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 mt-5">
+                        <img src="~/@Model.Image" alt="Alternate Text" style="border-radius: 5px;border: 1px solid #efefef" ; width="300" ;height="300" />
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js">
+
+        $(function(){
+
+            var update = '@TempData["update"]';
+
+            if (update != null) {
+                alertify.success(update);
+            }
+        });
+    </script>
+}

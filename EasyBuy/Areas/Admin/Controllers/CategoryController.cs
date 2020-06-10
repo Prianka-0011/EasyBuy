@@ -112,7 +112,10 @@ namespace EasyBuy.Controllers
                     TempData["update"] = "This Product successfuly update";
                     return RedirectToAction(nameof(Index));
                 }
-                _context.Categories.Update(categoryVm);
+                var category = _context.Categories.FirstOrDefault(c => c.Id == categoryVm.Id);
+                category.Name = categoryVm.Name;
+                category.Image = categoryVm.Image;
+                _context.Categories.Update(category);
                 await _context.SaveChangesAsync();
               return  RedirectToAction(nameof(Index));
             }
