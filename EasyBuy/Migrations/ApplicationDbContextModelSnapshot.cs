@@ -25,9 +25,9 @@ namespace EasyBuy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ProductId");
+                    b.Property<int>("ProductId");
 
-                    b.Property<string>("Quantity");
+                    b.Property<int>("Quantity");
 
                     b.Property<string>("UserId");
 

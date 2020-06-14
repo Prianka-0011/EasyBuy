@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyBuy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200609141930_NameFeildAdd")]
-    partial class NameFeildAdd
+    [Migration("20200613145051_AllModelAdd")]
+    partial class AllModelAdd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,9 +27,9 @@ namespace EasyBuy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ProductId");
+                    b.Property<int>("ProductId");
 
-                    b.Property<string>("Quantity");
+                    b.Property<int>("Quantity");
 
                     b.Property<string>("UserId");
 
@@ -91,7 +91,8 @@ namespace EasyBuy.Migrations
 
                     b.Property<bool>("IsAviable");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<decimal>("PrevPrice");
 

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<EasyBuy.ViewModels.CartItemVm>
+@{
+    ViewData["Title"] = "Cart";
+    int i = 1;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                <span class=" text-warning font-weight-normal"><b>Cart Product </b></span>
+            </div>
+            <div class="table-responsive">
+                @if (Model != null)
+                {
+
+                    <table class=" table border-top-0 table-bordered m-3 table-striped font-weight-normal">
+                        <thead style="font-size:12px">
+                            <tr>
+                                <th>#</th>
+                                <th>ProductId</th>
+                                <th>Category Name</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>PrevPrice</th>
+                                <th>Quantity</th>
+                                <th>Description</th>
+                                <th>Specification</th>
+                                <th>Image</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size:11px">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@item.Category</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.PrevPrice</td>
+                                    <td>@item.Quentity</td>
+                                    <td><img src="~/@item.Image" alt="Alternate Text" style="height:50px;width:50px; border-radius:25px" /></td>
+                                    <partial name="_ButtonPartial" model="@item.Id" />
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>

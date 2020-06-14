@@ -45,3 +45,4 @@ C:\Users\niku\source\repos\EasyBuy\EasyBuy\obj\Debug\netcoreapp2.2\Razor\Areas\C
 C:\Users\niku\source\repos\EasyBuy\EasyBuy\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Product\Details.g.cshtml.cs
 C:\Users\niku\source\repos\EasyBuy\EasyBuy\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Product\Edit.g.cshtml.cs
 C:\Users\niku\source\repos\EasyBuy\EasyBuy\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Product\Delete.g.cshtml.cs
+C:\Users\niku\source\repos\EasyBuy\EasyBuy\obj\Debug\netcoreapp2.2\Razor\Areas\Customer\Views\Home\Details.g.cshtml.cs
