@@ -1,0 +1,50 @@
+﻿@model EasyBuy.ViewModels.Register
+@{
+    ViewData["Title"] = "Register";
+}
+
+<form asp-action="Register" asp-controller="Acc" method="post">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h1>Register here</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 offset-md-2">
+                        <div class="form-group">
+                            <label asp-for="UserName"></label>
+                            <input asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FullName"></label>
+                            <input asp-for="FullName" class="form-control" />
+                            <span asp-validation-for="FullName"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input class="form-control" asp-for="Email" />
+                            <span asp-validation-for="Email"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input class="form-control" asp-for="Password" />
+                            <span asp-validation-for="Password"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword"></label>
+                            <input class="form-control" asp-for="ConfirmPassword" />
+                            <span asp-validation-for="ConfirmPassword"></span>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-danger" type="submit">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

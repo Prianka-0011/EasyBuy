@@ -49,12 +49,13 @@ namespace EasyBuy.Controllers
                     itemVm.Price = cartProdut.Price;
                     itemVm.PrevPrice = cartProdut.PrevPrice;
                     itemVm.Category = cartProdut.Category.Name;
-
+                    itemVm.Image = cartProdut.Image;
+                    addItem.Add(itemVm);
 
                 }
               
             }
-            return View();
+            return View(addItem);
         }
         //HttpGet For Details
         [HttpGet]
@@ -105,7 +106,7 @@ namespace EasyBuy.Controllers
                     newCart.Add(item);
                 }
                 HttpContext.Session.Set<List<CartItem>>("cart", newCart);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Cart");
             }
             else
             {
@@ -115,8 +116,132 @@ namespace EasyBuy.Controllers
                 item.Quantity = quentity;
                 newCart.Add(item);
                 HttpContext.Session.Set<List<CartItem>>("cart", newCart);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Cart");
             }
+        }
+        [HttpGet]
+        public IActionResult IncCartItem(int?id)
+        {
+
+            if (id==null)
+            {
+                return NotFound();
+            }
+            List<CartItem> cartItem = HttpContext.Session.Get<List<CartItem>>("cart");
+                List<CartItem> newCart = new List<CartItem>();
+                foreach (var item in cartItem)
+                {
+                    if (item.ProductId == id)
+                    {
+                        item.Quantity++;
+                    }
+                    newCart.Add(item);
+                }
+                HttpContext.Session.Set<List<CartItem>>("cart", newCart);
+                return RedirectToAction("Cart");
+           
+           
+        }
+        [HttpGet]
+        public IActionResult DecCartItem(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+            List<CartItem> cartItem = HttpContext.Session.Get<List<CartItem>>("cart");
+            List<CartItem> newCart = new List<CartItem>();
+            foreach (var item in cartItem)
+            {
+                if (item.ProductId == id)
+                {
+                    item.Quantity--;
+                    if (item.Quantity==0)
+                    {
+                        cartItem.Remove(item);
+                        HttpContext.Session.Set<List<CartItem>>("cart", newCart);
+                        return RedirectToAction("Cart");
+                    }
+                }
+                newCart.Add(item);
+            }
+            HttpContext.Session.Set<List<CartItem>>("cart", newCart);
+            return RedirectToAction("Cart");
+        }
+        [HttpGet]
+        public IActionResult RemoveCartItem(int ?id)
+        {
+            List<CartItem> cartItem = HttpContext.Session.Get<List<CartItem>>("cart");
+            List<CartItem> newCart = new List<CartItem>();
+            foreach (var item in cartItem)
+            {
+                if (item.ProductId == id)
+                {
+                   
+                        cartItem.Remove(item);
+                        HttpContext.Session.Set<List<CartItem>>("cart", cartItem);
+                        return RedirectToAction("Cart");                 
+                }
+                
+            }
+            return RedirectToAction("Cart");
+        }
+        [HttpGet]
+        public IActionResult CheckOut()
+        {
+            List<CartItem> cartItem = HttpContext.Session.Get<List<CartItem>>("cart");
+           List<CartItemVm> addItem = new List<CartItemVm>();
+            if (cartItem!=null)
+            {
+                foreach (var item in cartItem)
+                {
+                    CartItemVm itemVm = new CartItemVm();
+                  var cartProdut = _context.Products.Include(c => c.Category).FirstOrDefault(c => c.Id == item.ProductId);
+                    itemVm.ProductId = item.ProductId;
+                    itemVm.Quentity = item.Quantity;
+                    itemVm.Name = cartProdut.Name;
+                    itemVm.Price = cartProdut.Price;
+                    itemVm.PrevPrice = cartProdut.PrevPrice;
+                    itemVm.Category = cartProdut.Category.Name;
+                    itemVm.Image = cartProdut.Image;
+                    addItem.Add(itemVm);
+
+                }
+                ViewBag.CheckOutItem = addItem;
+              
+            }
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CheckOut(CheckOutVm checkOut)
+        {
+            List<CartItem> cartItem = HttpContext.Session.Get<List<CartItem>>("cart");
+            List<CartItem> emptyobject = new List<CartItem>();
+
+
+            if (ModelState.IsValid)
+            {
+                foreach (var item in cartItem)
+                {
+                    Order order = new Order();
+                    order.FullName = checkOut.FullName;
+                    order.PhoneNo = checkOut.PhoneNo;
+                    order.Address = checkOut.Address;
+                    order.ProductId = item.ProductId;
+                    order.Quentity = item.Quantity;
+                    _context.Orders.Add(order);
+                    await _context.SaveChangesAsync();
+                }
+                
+            }
+             HttpContext.Session.Set<List<CartItem>>("cart", emptyobject);
+            return View("Payment");
+        }
+        public IActionResult Payment()
+        {
+            return View();
         }
         public IActionResult Privacy()
         {

@@ -13,6 +13,7 @@ namespace EasyBuy.Models
         public string Address { get; set; }
         public int OrderNo { get; set; }
         //Navigation Prop
+        public int Quentity { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }
     }

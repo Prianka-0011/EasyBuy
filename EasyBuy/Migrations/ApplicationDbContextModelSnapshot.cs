@@ -52,6 +52,22 @@ namespace EasyBuy.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("EasyBuy.Models.CustomerModel", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FullName");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
+                });
+
             modelBuilder.Entity("EasyBuy.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -67,6 +83,8 @@ namespace EasyBuy.Migrations
                     b.Property<string>("PhoneNo");
 
                     b.Property<int>("ProductId");
+
+                    b.Property<int>("Quentity");
 
                     b.HasKey("Id");
 

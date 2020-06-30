@@ -10,7 +10,7 @@
       "NETCOREAPP",
       "NETCOREAPP2_2"
     ],
-    "languageVersion": "",
+    "languageVersion": "7.2",
     "platform": "",
     "allowUnsafe": false,
     "warningsAsErrors": false,

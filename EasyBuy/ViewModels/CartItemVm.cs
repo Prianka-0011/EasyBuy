@@ -15,7 +15,7 @@ namespace EasyBuy.ViewModels
         public decimal Price { get; set; }
        
         public decimal PrevPrice { get; set; }
-        public int Quentity { get; set; }
+        public decimal Quentity { get; set; }
         public string Image { get; set; }
         //Nvigation Prop
         public string Category { get; set; }

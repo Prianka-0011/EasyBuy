@@ -12,7 +12,7 @@
             <div class="form-group row">
                 @*<div class="col-md-3">
 
-                </div>*@
+                    </div>*@
                 <div class="col-md-5">
                     <label asp-for="Name"></label>
                     <input readonly="readonly" asp-for="Name" class="form-control" />
@@ -31,3 +31,26 @@
         </div>
     </div>
 </div>
+@section Scripts
+{
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js">
+
+        $(function(){
+            var create = '@TempData["create"]';
+            var update = '@TempData["update"]';
+            var delete = '@TempData["delete"]';
+            if (create != null) {
+                alertify.success(create);
+            }
+            if (update != null) {
+                alertify.success(update);
+            }
+            if (delete != null) {
+                alertify.success(delete);
+            }
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync(partialViewName: "_ValidationScriptsPartial.cshtml");
+    }
+}

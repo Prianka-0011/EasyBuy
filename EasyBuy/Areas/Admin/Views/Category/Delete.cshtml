@@ -18,9 +18,9 @@
             </div>
             <div class="form-group row">
                 <form asp-action="Delete" method="post">
-                    <input type="hidden" asp-for="Id"  />
+                    <input type="hidden" asp-for="Id" />
                     <button class="btn btn-danger" type="submit">Delete</button>
-                    <a  asp-action="Index" class="btn btn-dark">Back To List</a>
+                    <a asp-action="Index" class="btn btn-dark">Back To List</a>
                 </form>
             </div>
         </div>
@@ -29,3 +29,8 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync(partialViewName: "_ValidationScriptsPartial.cshtml");
+    }
+}

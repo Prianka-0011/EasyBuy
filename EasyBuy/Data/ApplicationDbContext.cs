@@ -19,5 +19,6 @@ namespace EasyBuy.Data
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<CustomerModel> Customers { get; set; }
     }
 }
